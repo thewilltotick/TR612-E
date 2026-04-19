@@ -1,0 +1,286 @@
+components:
+  - id: BAT_48V_A
+    type: battery
+    subtype: lifepo4_server_rack
+    role: primary_storage
+    nominal_voltage_v: 51.2
+    capacity_ah: 100
+    location: rack_bottom_left
+    notes: First 48V server-rack battery
+
+  - id: BAT_48V_B
+    type: battery
+    subtype: lifepo4_server_rack
+    role: primary_storage
+    nominal_voltage_v: 51.2
+    capacity_ah: 100
+    location: rack_bottom_right
+    notes: Second 48V server-rack battery
+
+  - id: BUS_48V_MAIN
+    type: busbar
+    subtype: dc_positive_distribution
+    nominal_voltage_v: 48
+    location: breaker_layer
+
+  - id: BUS_48V_NEG
+    type: busbar
+    subtype: dc_negative_return
+    nominal_voltage_v: 48
+    location: breaker_layer
+
+  - id: SHUNT_48V_MAIN
+    type: shunt
+    subtype: battery_monitor
+    nominal_voltage_v: 48
+    location: breaker_layer
+    notes: Main 48V current and voltage monitoring point
+
+  - id: FUSE_CLASS_T_MAIN
+    type: fuse
+    subtype: class_t
+    rating_a: 250
+    nominal_voltage_v: 58
+    location: breaker_layer
+    notes: Placeholder main battery fuse value; verify later
+
+  - id: SW_48V_MAIN
+    type: disconnect_switch
+    subtype: battery_disconnect
+    nominal_voltage_v: 48
+    location: breaker_layer
+
+  - id: INV_48V_AIO
+    type: inverter_charger
+    subtype: all_in_one
+    manufacturer: ECO-WORTHY
+    model: 3500W_48V_AIO
+    input_voltage_v: 48
+    ac_output_voltage_v: 120
+    pv_input_max_w: 4400
+    location: rack_mid
+
+  - id: PV_ARRAY_2S2P
+    type: solar_array
+    subtype: pv_source
+    nominal_voltage_v: null
+    panel_count: 4
+    panel_configuration: 2S2P
+    panel_model: GSTAR_440W
+    location: trailer_roof
+
+  - id: SPD_PV_IN
+    type: surge_protection
+    subtype: dc_spd
+    nominal_voltage_v: null
+    location: pv_combiner_area
+
+  - id: BRK_PV_INPUT
+    type: breaker
+    subtype: pv_disconnect
+    nominal_voltage_v: null
+    location: pv_combiner_area
+
+  - id: SHORE_AC_IN
+    type: ac_source
+    subtype: shore_power
+    nominal_voltage_v: 120
+    location: exterior_power_inlet
+
+  - id: SPD_AC_IN
+    type: surge_protection
+    subtype: ac_spd
+    nominal_voltage_v: 120
+    location: ac_distribution
+
+  - id: BRK_AC_IN
+    type: breaker
+    subtype: ac_input_disconnect
+    nominal_voltage_v: 120
+    location: ac_distribution
+
+  - id: PANEL_AC_OUT
+    type: ac_distribution_panel
+    subtype: load_center
+    nominal_voltage_v: 120
+    location: rack_or_cabinet
+
+  - id: SPD_AC_OUT
+    type: surge_protection
+    subtype: ac_spd
+    nominal_voltage_v: 120
+    location: ac_distribution
+
+  - id: BRANCH_AC_GENERAL
+    type: ac_branch
+    subtype: receptacles_general
+    nominal_voltage_v: 120
+    location: trailer
+
+  - id: DCDC_48V_TO_12V_MAIN
+    type: dc_dc_converter
+    subtype: buck_converter
+    input_voltage_v: 48
+    output_voltage_v: 12
+    max_current_a: 30
+    location: breaker_layer
+    notes: Main 12V converter; placeholder current, verify later
+
+  - id: BUS_12V_DIRTY
+    type: busbar
+    subtype: dc_positive_distribution
+    nominal_voltage_v: 12
+    location: breaker_layer
+    notes: High-noise or high-current 12V loads
+
+  - id: BUS_12V_CLEAN
+    type: busbar
+    subtype: dc_positive_distribution
+    nominal_voltage_v: 12
+    location: digital_layer
+    notes: Sensitive electronics 12V loads
+
+  - id: BUS_12V_NEG
+    type: busbar
+    subtype: dc_negative_return
+    nominal_voltage_v: 12
+    location: breaker_layer
+
+  - id: BRK_12V_MAIN
+    type: breaker
+    subtype: dc_main_distribution
+    nominal_voltage_v: 12
+    location: breaker_layer
+
+  - id: UPS_12V_CRITICAL
+    type: ups
+    subtype: dc_12v_buffer
+    input_voltage_v: 12
+    output_voltage_v: 12
+    location: digital_layer
+    notes: Placeholder critical 12V ride-through subsystem
+
+  - id: DCDC_12V_TO_5V_CRITICAL
+    type: dc_dc_converter
+    subtype: buck_converter
+    input_voltage_v: 12
+    output_voltage_v: 5
+    max_current_a: 10
+    location: digital_layer
+
+  - id: UPS_5V_PI
+    type: ups
+    subtype: dc_5v_buffer
+    input_voltage_v: 5
+    output_voltage_v: 5
+    location: digital_layer
+    notes: Raspberry Pi focused 5V UPS stage
+
+  - id: BUS_5V_CRITICAL
+    type: busbar
+    subtype: dc_positive_distribution
+    nominal_voltage_v: 5
+    location: digital_layer
+
+  - id: RPI5_MAIN
+    type: compute
+    subtype: raspberry_pi
+    model: Raspberry_Pi_5
+    storage: nvme
+    location: digital_layer
+
+  - id: RELAY_5V_IO
+    type: relay_board
+    subtype: gpio_controlled
+    nominal_voltage_v: 5
+    channel_count: 8
+    location: digital_layer
+
+  - id: SW_POE_MAIN
+    type: network_switch
+    subtype: poe_switch
+    nominal_voltage_v: 12
+    location: digital_layer
+    notes: Model TBD; choose final voltage when hardware is locked
+
+  - id: STARLINK_MINI
+    type: network_load
+    subtype: satellite_terminal
+    nominal_voltage_v: null
+    location: trailer_or_roof
+    notes: May be powered through a dedicated PoE injector/converter depending on final design
+
+  - id: CAM_POE_01
+    type: camera
+    subtype: poe_ip_camera
+    nominal_voltage_v: null
+    location: trailer_exterior_front
+
+  - id: CAM_POE_02
+    type: camera
+    subtype: poe_ip_camera
+    nominal_voltage_v: null
+    location: trailer_exterior_rear
+
+  - id: CAM_POE_03
+    type: camera
+    subtype: poe_ip_camera
+    nominal_voltage_v: null
+    location: trailer_exterior_left
+
+  - id: CAM_POE_04
+    type: camera
+    subtype: poe_ip_camera
+    nominal_voltage_v: null
+    location: trailer_exterior_right
+
+  - id: TEMP_RACK
+    type: sensor
+    subtype: temperature
+    nominal_voltage_v: 3.3
+    location: rack_interior
+
+  - id: TEMP_TRAILER_INSIDE
+    type: sensor
+    subtype: temperature
+    nominal_voltage_v: 3.3
+    location: trailer_interior
+
+  - id: TEMP_TRAILER_OUTSIDE
+    type: sensor
+    subtype: temperature
+    nominal_voltage_v: 3.3
+    location: trailer_exterior
+
+  - id: RS232_BAT_A
+    type: telemetry_interface
+    subtype: rs232
+    location: BAT_48V_A
+
+  - id: RS232_BAT_B
+    type: telemetry_interface
+    subtype: rs232
+    location: BAT_48V_B
+
+  - id: RS485_INV_AIO
+    type: telemetry_interface
+    subtype: rs485
+    location: INV_48V_AIO
+
+  - id: SHUNT_DC_LOAD_01
+    type: shunt
+    subtype: load_monitor
+    nominal_voltage_v: 12
+    location: dirty_12v_distribution
+
+  - id: SHUNT_DC_LOAD_02
+    type: shunt
+    subtype: load_monitor
+    nominal_voltage_v: 12
+    location: clean_12v_distribution
+
+  - id: SHUNT_DC_LOAD_03
+    type: shunt
+    subtype: load_monitor
+    nominal_voltage_v: 5
+    location: critical_5v_distribution

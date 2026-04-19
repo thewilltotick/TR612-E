@@ -1,0 +1,129 @@
+sensors:
+  - id: SENS_SHUNT_48V_MAIN
+    component_id: SHUNT_48V_MAIN
+    interface: ve_direct_usb
+    source_device: victron_smartshunt
+    metrics:
+      - battery_voltage_v
+      - battery_current_a
+      - battery_power_w
+      - state_of_charge_pct
+      - consumed_ah
+    polling:
+      mode: stream_or_poll
+      interval_seconds: 1
+
+  - id: SENS_RS232_BAT_A
+    component_id: RS232_BAT_A
+    interface: usb_rs232
+    source_device: battery_a_bms
+    metrics:
+      - battery_voltage_v
+      - battery_current_a
+      - state_of_charge_pct
+      - cell_min_v
+      - cell_max_v
+      - temperature_c
+      - alarm_state
+    polling:
+      mode: poll
+      interval_seconds: 2
+
+  - id: SENS_RS232_BAT_B
+    component_id: RS232_BAT_B
+    interface: usb_rs232
+    source_device: battery_b_bms
+    metrics:
+      - battery_voltage_v
+      - battery_current_a
+      - state_of_charge_pct
+      - cell_min_v
+      - cell_max_v
+      - temperature_c
+      - alarm_state
+    polling:
+      mode: poll
+      interval_seconds: 2
+
+  - id: SENS_RS485_INV
+    component_id: RS485_INV_AIO
+    interface: usb_rs485
+    source_device: inverter_charger
+    metrics:
+      - inverter_status
+      - ac_output_v
+      - ac_output_w
+      - ac_input_present
+      - pv_input_v
+      - pv_input_w
+      - fault_code
+      - heatsink_temp_c
+    polling:
+      mode: poll
+      interval_seconds: 2
+
+  - id: SENS_TEMP_RACK
+    component_id: TEMP_RACK
+    interface: gpio_1wire_or_i2c
+    source_device: rack_temp_sensor
+    metrics:
+      - temperature_c
+    polling:
+      mode: poll
+      interval_seconds: 5
+
+  - id: SENS_TEMP_TRAILER_INSIDE
+    component_id: TEMP_TRAILER_INSIDE
+    interface: gpio_1wire_or_i2c
+    source_device: inside_temp_sensor
+    metrics:
+      - temperature_c
+    polling:
+      mode: poll
+      interval_seconds: 5
+
+  - id: SENS_TEMP_TRAILER_OUTSIDE
+    component_id: TEMP_TRAILER_OUTSIDE
+    interface: gpio_1wire_or_i2c
+    source_device: outside_temp_sensor
+    metrics:
+      - temperature_c
+    polling:
+      mode: poll
+      interval_seconds: 5
+
+  - id: SENS_SHUNT_12V_DIRTY
+    component_id: SHUNT_DC_LOAD_01
+    interface: adc_or_serial
+    source_device: dirty_12v_load_monitor
+    metrics:
+      - bus_voltage_v
+      - current_a
+      - power_w
+    polling:
+      mode: poll
+      interval_seconds: 2
+
+  - id: SENS_SHUNT_12V_CLEAN
+    component_id: SHUNT_DC_LOAD_02
+    interface: adc_or_serial
+    source_device: clean_12v_load_monitor
+    metrics:
+      - bus_voltage_v
+      - current_a
+      - power_w
+    polling:
+      mode: poll
+      interval_seconds: 2
+
+  - id: SENS_SHUNT_5V_CRITICAL
+    component_id: SHUNT_DC_LOAD_03
+    interface: adc_or_serial
+    source_device: critical_5v_load_monitor
+    metrics:
+      - bus_voltage_v
+      - current_a
+      - power_w
+    polling:
+      mode: poll
+      interval_seconds: 2
