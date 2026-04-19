@@ -1,185 +1,261 @@
 connections:
-  - from: BAT_48V_A
-    to: BUS_48V_MAIN
-    via:
-      - FUSE_CLASS_T_MAIN
-      - SW_48V_MAIN
-    connection_type: power
-    notes: Battery A positive feed to main 48V bus
-
-  - from: BAT_48V_B
-    to: BUS_48V_MAIN
-    via:
-      - FUSE_CLASS_T_MAIN
-      - SW_48V_MAIN
-    connection_type: power
-    notes: Battery B positive feed to main 48V bus
-
-  - from: BAT_48V_A
-    to: SHUNT_48V_MAIN
-    connection_type: power_return
-
-  - from: BAT_48V_B
-    to: SHUNT_48V_MAIN
-    connection_type: power_return
-
-  - from: SHUNT_48V_MAIN
-    to: BUS_48V_NEG
-    connection_type: power_return
-
-  - from: BUS_48V_MAIN
-    to: INV_48V_AIO
-    connection_type: power
-
-  - from: BUS_48V_NEG
-    to: INV_48V_AIO
-    connection_type: power_return
-
-  - from: PV_ARRAY_2S2P
-    to: SPD_PV_IN
-    connection_type: power
-
-  - from: SPD_PV_IN
-    to: BRK_PV_INPUT
-    connection_type: power
-
-  - from: BRK_PV_INPUT
-    to: INV_48V_AIO
-    connection_type: power
-    notes: PV input to AIO MPPT input
-
-  - from: SHORE_AC_IN
-    to: SPD_AC_IN
-    connection_type: ac_power
-
-  - from: SPD_AC_IN
-    to: BRK_AC_IN
-    connection_type: ac_power
-
-  - from: BRK_AC_IN
-    to: INV_48V_AIO
-    connection_type: ac_power
-    notes: Shore power into AIO AC input
-
-  - from: INV_48V_AIO
-    to: SPD_AC_OUT
-    connection_type: ac_power
-
-  - from: SPD_AC_OUT
-    to: PANEL_AC_OUT
-    connection_type: ac_power
-
-  - from: PANEL_AC_OUT
-    to: BRANCH_AC_GENERAL
-    connection_type: ac_branch
-
-  - from: BUS_48V_MAIN
-    to: DCDC_48V_TO_12V_MAIN
-    connection_type: power
-
-  - from: BUS_48V_NEG
-    to: DCDC_48V_TO_12V_MAIN
-    connection_type: power_return
-
-  - from: DCDC_48V_TO_12V_MAIN
-    to: BRK_12V_MAIN
-    connection_type: power
-
-  - from: BRK_12V_MAIN
-    to: BUS_12V_DIRTY
-    connection_type: power
-
-  - from: BRK_12V_MAIN
-    to: BUS_12V_CLEAN
-    connection_type: power
-
-  - from: DCDC_48V_TO_12V_MAIN
-    to: BUS_12V_NEG
-    connection_type: power_return
-
-  - from: BUS_12V_CLEAN
-    to: UPS_12V_CRITICAL
-    connection_type: power
-
-  - from: UPS_12V_CRITICAL
-    to: DCDC_12V_TO_5V_CRITICAL
-    connection_type: power
-
-  - from: DCDC_12V_TO_5V_CRITICAL
-    to: UPS_5V_PI
-    connection_type: power
-
-  - from: UPS_5V_PI
-    to: BUS_5V_CRITICAL
-    connection_type: power
-
-  - from: BUS_5V_CRITICAL
-    to: RPI5_MAIN
-    connection_type: power
-
-  - from: BUS_5V_CRITICAL
-    to: RELAY_5V_IO
-    connection_type: power
-
-  - from: BUS_12V_CLEAN
-    to: SW_POE_MAIN
-    connection_type: power
-
-  - from: SW_POE_MAIN
-    to: STARLINK_MINI
-    connection_type: data_power
-
-  - from: SW_POE_MAIN
-    to: CAM_POE_01
-    connection_type: data_power
-
-  - from: SW_POE_MAIN
-    to: CAM_POE_02
-    connection_type: data_power
-
-  - from: SW_POE_MAIN
-    to: CAM_POE_03
-    connection_type: data_power
-
-  - from: SW_POE_MAIN
-    to: CAM_POE_04
-    connection_type: data_power
-
-  - from: RS232_BAT_A
-    to: RPI5_MAIN
-    connection_type: telemetry
-    notes: Via USB-RS232 adapter
-
-  - from: RS232_BAT_B
-    to: RPI5_MAIN
-    connection_type: telemetry
-    notes: Via USB-RS232 adapter
-
-  - from: RS485_INV_AIO
-    to: RPI5_MAIN
-    connection_type: telemetry
-    notes: Via USB-RS485 adapter
-
-  - from: TEMP_RACK
-    to: RPI5_MAIN
-    connection_type: telemetry
-
-  - from: TEMP_TRAILER_INSIDE
-    to: RPI5_MAIN
-    connection_type: telemetry
-
-  - from: TEMP_TRAILER_OUTSIDE
-    to: RPI5_MAIN
-    connection_type: telemetry
-
-  - from: SHUNT_DC_LOAD_01
-    to: RPI5_MAIN
-    connection_type: telemetry
-
-  - from: SHUNT_DC_LOAD_02
-    to: RPI5_MAIN
-    connection_type: telemetry
-
-  - from: SHUNT_DC_LOAD_03
-    to: RPI5_MAIN
-    connection_type: telemetry
+- id: L001
+  from: BAT_48V_A
+  to: FUSE_BAT_A_POS
+  kind: power_pos
+  voltage: 48V
+  notes: Battery A positive
+- id: L002
+  from: FUSE_BAT_A_POS
+  to: SW_48V_MAIN
+  kind: power_pos
+  voltage: 48V
+- id: L003
+  from: SW_48V_MAIN
+  to: BUS_48V_POS
+  kind: power_pos
+  voltage: 48V
+- id: L004
+  from: BAT_48V_B
+  to: FUSE_BAT_B_POS
+  kind: power_pos
+  voltage: 48V
+  notes: Battery B positive
+- id: L005
+  from: FUSE_BAT_B_POS
+  to: SW_48V_MAIN
+  kind: power_pos
+  voltage: 48V
+- id: L006
+  from: BAT_48V_A
+  to: SHUNT_48V_MAIN
+  kind: power_neg
+  voltage: 48V
+  notes: Battery A negative
+- id: L007
+  from: BAT_48V_B
+  to: SHUNT_48V_MAIN
+  kind: power_neg
+  voltage: 48V
+  notes: Battery B negative
+- id: L008
+  from: SHUNT_48V_MAIN
+  to: BUS_48V_NEG
+  kind: power_neg
+  voltage: 48V
+- id: L009
+  from: BUS_48V_POS
+  to: INV_48V_AIO
+  kind: power_pos
+  voltage: 48V
+- id: L010
+  from: BUS_48V_NEG
+  to: INV_48V_AIO
+  kind: power_neg
+  voltage: 48V
+- id: L011
+  from: PV_ARRAY_2S2P
+  to: SPD_PV_IN
+  kind: power_pos
+  voltage: PV
+- id: L012
+  from: SPD_PV_IN
+  to: BRK_PV_INPUT
+  kind: power_pos
+  voltage: PV
+- id: L013
+  from: BRK_PV_INPUT
+  to: INV_48V_AIO
+  kind: power_pos
+  voltage: PV
+- id: L014
+  from: SHORE_AC_IN
+  to: SPD_AC_IN
+  kind: ac_line
+  voltage: 120VAC
+- id: L015
+  from: SPD_AC_IN
+  to: BRK_AC_IN
+  kind: ac_line
+  voltage: 120VAC
+- id: L016
+  from: BRK_AC_IN
+  to: INV_48V_AIO
+  kind: ac_line
+  voltage: 120VAC
+- id: L017
+  from: INV_48V_AIO
+  to: SPD_AC_OUT
+  kind: ac_line
+  voltage: 120VAC
+- id: L018
+  from: SPD_AC_OUT
+  to: PANEL_AC_OUT
+  kind: ac_line
+  voltage: 120VAC
+- id: L019
+  from: PANEL_AC_OUT
+  to: BRANCH_AC_GENERAL
+  kind: ac_line
+  voltage: 120VAC
+- id: L020
+  from: BUS_48V_POS
+  to: DCDC_48V_TO_12V_MAIN
+  kind: power_pos
+  voltage: 48V
+- id: L021
+  from: BUS_48V_NEG
+  to: DCDC_48V_TO_12V_MAIN
+  kind: power_neg
+  voltage: 48V
+- id: L022
+  from: DCDC_48V_TO_12V_MAIN
+  to: BRK_12V_MAIN_DIRTY
+  kind: power_pos
+  voltage: 12V
+- id: L023
+  from: DCDC_48V_TO_12V_MAIN
+  to: BRK_12V_MAIN_CLEAN
+  kind: power_pos
+  voltage: 12V
+- id: L024
+  from: BRK_12V_MAIN_DIRTY
+  to: BUS_12V_DIRTY_POS
+  kind: power_pos
+  voltage: 12V
+- id: L025
+  from: BRK_12V_MAIN_CLEAN
+  to: BUS_12V_CLEAN_POS
+  kind: power_pos
+  voltage: 12V
+- id: L026
+  from: DCDC_48V_TO_12V_MAIN
+  to: BUS_12V_NEG
+  kind: power_neg
+  voltage: 12V
+- id: L027
+  from: BUS_12V_CLEAN_POS
+  to: UPS_12V_CRITICAL
+  kind: power_pos
+  voltage: 12V
+- id: L028
+  from: BUS_12V_NEG
+  to: UPS_12V_CRITICAL
+  kind: power_neg
+  voltage: 12V
+- id: L029
+  from: UPS_12V_CRITICAL
+  to: DCDC_12V_TO_5V_CRITICAL
+  kind: power_pos
+  voltage: 12V
+- id: L030
+  from: BUS_12V_NEG
+  to: DCDC_12V_TO_5V_CRITICAL
+  kind: power_neg
+  voltage: 12V
+- id: L031
+  from: DCDC_12V_TO_5V_CRITICAL
+  to: UPS_5V_PI
+  kind: power_pos
+  voltage: 5V
+- id: L032
+  from: DCDC_12V_TO_5V_CRITICAL
+  to: BUS_5V_NEG
+  kind: power_neg
+  voltage: 5V
+- id: L033
+  from: UPS_5V_PI
+  to: BUS_5V_CRITICAL_POS
+  kind: power_pos
+  voltage: 5V
+- id: L034
+  from: BUS_5V_CRITICAL_POS
+  to: RPI5_MAIN
+  kind: power_pos
+  voltage: 5V
+- id: L035
+  from: BUS_5V_NEG
+  to: RPI5_MAIN
+  kind: power_neg
+  voltage: 5V
+- id: L036
+  from: BUS_5V_CRITICAL_POS
+  to: RELAY_5V_IO
+  kind: power_pos
+  voltage: 5V
+- id: L037
+  from: BUS_5V_NEG
+  to: RELAY_5V_IO
+  kind: power_neg
+  voltage: 5V
+- id: L038
+  from: BUS_12V_CLEAN_POS
+  to: SW_POE_MAIN
+  kind: power_pos
+  voltage: 12V
+- id: L039
+  from: BUS_12V_NEG
+  to: SW_POE_MAIN
+  kind: power_neg
+  voltage: 12V
+- id: L040
+  from: SW_POE_MAIN
+  to: STARLINK_MINI
+  kind: data_power
+  voltage: PoE
+- id: L041
+  from: SW_POE_MAIN
+  to: CAM_POE_01
+  kind: data_power
+  voltage: PoE
+- id: L042
+  from: SW_POE_MAIN
+  to: CAM_POE_02
+  kind: data_power
+  voltage: PoE
+- id: L043
+  from: SW_POE_MAIN
+  to: CAM_POE_03
+  kind: data_power
+  voltage: PoE
+- id: L044
+  from: SW_POE_MAIN
+  to: CAM_POE_04
+  kind: data_power
+  voltage: PoE
+- id: L045
+  from: RS232_BAT_A
+  to: RPI5_MAIN
+  kind: telemetry
+- id: L046
+  from: RS232_BAT_B
+  to: RPI5_MAIN
+  kind: telemetry
+- id: L047
+  from: RS485_INV_AIO
+  to: RPI5_MAIN
+  kind: telemetry
+- id: L048
+  from: TEMP_RACK
+  to: RPI5_MAIN
+  kind: telemetry
+- id: L049
+  from: TEMP_TRAILER_INSIDE
+  to: RPI5_MAIN
+  kind: telemetry
+- id: L050
+  from: TEMP_TRAILER_OUTSIDE
+  to: RPI5_MAIN
+  kind: telemetry
+- id: L051
+  from: SHUNT_DC_LOAD_01
+  to: RPI5_MAIN
+  kind: telemetry
+- id: L052
+  from: SHUNT_DC_LOAD_02
+  to: RPI5_MAIN
+  kind: telemetry
+- id: L053
+  from: SHUNT_DC_LOAD_03
+  to: RPI5_MAIN
+  kind: telemetry

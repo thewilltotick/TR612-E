@@ -1,0 +1,736 @@
+components:
+- id: BAT_48V_A
+  label: Battery A 48V
+  type: battery
+  domain: dc48
+  location: rack_bottom
+  attrs:
+    nominal_voltage_v: 51.2
+    capacity_ah: 100
+- id: BAT_48V_B
+  label: Battery B 48V
+  type: battery
+  domain: dc48
+  location: rack_bottom
+  attrs:
+    nominal_voltage_v: 51.2
+    capacity_ah: 100
+- id: FUSE_BAT_A_POS
+  label: Fuse Bat A +
+  type: fuse
+  domain: dc48
+  location: breaker_layer
+  attrs:
+    rating_a: 250
+- id: FUSE_BAT_B_POS
+  label: Fuse Bat B +
+  type: fuse
+  domain: dc48
+  location: breaker_layer
+  attrs:
+    rating_a: 250
+- id: SW_48V_MAIN
+  label: 48V Main Disconnect
+  type: disconnect_switch
+  domain: dc48
+  location: breaker_layer
+  attrs: {}
+- id: BUS_48V_POS
+  label: 48V + Bus
+  type: busbar
+  domain: dc48
+  location: breaker_layer
+  attrs: {}
+- id: SHUNT_48V_MAIN
+  label: Main 48V Shunt
+  type: shunt
+  domain: dc48
+  location: breaker_layer
+  attrs: {}
+- id: BUS_48V_NEG
+  label: 48V - Bus
+  type: busbar
+  domain: dc48
+  location: breaker_layer
+  attrs: {}
+- id: PV_ARRAY_2S2P
+  label: PV Array 2S2P
+  type: solar_array
+  domain: pv
+  location: roof
+  attrs:
+    panel_count: 4
+    panel_model: GSTAR 440W
+- id: SPD_PV_IN
+  label: PV SPD
+  type: surge_protection
+  domain: pv
+  location: roof_entry
+  attrs: {}
+- id: BRK_PV_INPUT
+  label: PV Disconnect
+  type: breaker
+  domain: pv
+  location: roof_entry
+  attrs: {}
+- id: SHORE_AC_IN
+  label: Shore AC In
+  type: ac_source
+  domain: ac120
+  location: exterior
+  attrs:
+    nominal_voltage_v: 120
+- id: SPD_AC_IN
+  label: AC In SPD
+  type: surge_protection
+  domain: ac120
+  location: ac_dist
+  attrs: {}
+- id: BRK_AC_IN
+  label: AC In Breaker
+  type: breaker
+  domain: ac120
+  location: ac_dist
+  attrs: {}
+- id: INV_48V_AIO
+  label: 48V AIO Inverter/Charger
+  type: inverter_charger
+  domain: multi
+  location: rack_mid
+  attrs:
+    model: ECO-WORTHY 3500W 48V AIO
+- id: SPD_AC_OUT
+  label: AC Out SPD
+  type: surge_protection
+  domain: ac120
+  location: ac_dist
+  attrs: {}
+- id: PANEL_AC_OUT
+  label: AC Distribution Panel
+  type: ac_distribution_panel
+  domain: ac120
+  location: trailer
+  attrs: {}
+- id: BRANCH_AC_GENERAL
+  label: AC General Branch
+  type: ac_branch
+  domain: ac120
+  location: trailer
+  attrs: {}
+- id: DCDC_48V_TO_12V_MAIN
+  label: 48V to 12V Converter
+  type: dc_dc_converter
+  domain: dc12
+  location: breaker_layer
+  attrs:
+    input_voltage_v: 48
+    output_voltage_v: 12
+    max_current_a: 30
+- id: BRK_12V_MAIN_DIRTY
+  label: 12V Dirty Main Breaker
+  type: breaker
+  domain: dc12
+  location: breaker_layer
+  attrs: {}
+- id: BRK_12V_MAIN_CLEAN
+  label: 12V Clean Main Breaker
+  type: breaker
+  domain: dc12
+  location: breaker_layer
+  attrs: {}
+- id: BUS_12V_DIRTY_POS
+  label: 12V Dirty + Bus
+  type: busbar
+  domain: dc12
+  location: breaker_layer
+  attrs: {}
+- id: BUS_12V_CLEAN_POS
+  label: 12V Clean + Bus
+  type: busbar
+  domain: dc12
+  location: digital_layer
+  attrs: {}
+- id: BUS_12V_NEG
+  label: 12V - Bus
+  type: busbar
+  domain: dc12
+  location: breaker_layer
+  attrs: {}
+- id: UPS_12V_CRITICAL
+  label: 12V Critical UPS
+  type: ups
+  domain: dc12
+  location: digital_layer
+  attrs: {}
+- id: DCDC_12V_TO_5V_CRITICAL
+  label: 12V to 5V Converter
+  type: dc_dc_converter
+  domain: dc5
+  location: digital_layer
+  attrs:
+    input_voltage_v: 12
+    output_voltage_v: 5
+    max_current_a: 10
+- id: UPS_5V_PI
+  label: 5V Pi UPS
+  type: ups
+  domain: dc5
+  location: digital_layer
+  attrs: {}
+- id: BUS_5V_CRITICAL_POS
+  label: 5V Critical + Bus
+  type: busbar
+  domain: dc5
+  location: digital_layer
+  attrs: {}
+- id: BUS_5V_NEG
+  label: 5V - Bus
+  type: busbar
+  domain: dc5
+  location: digital_layer
+  attrs: {}
+- id: RPI5_MAIN
+  label: Raspberry Pi 5
+  type: compute
+  domain: logic
+  location: digital_layer
+  attrs:
+    storage: nvme
+- id: RELAY_5V_IO
+  label: 5V Relay Board
+  type: relay_board
+  domain: dc5
+  location: digital_layer
+  attrs:
+    channel_count: 8
+- id: SW_POE_MAIN
+  label: PoE Switch
+  type: network_switch
+  domain: dc12
+  location: digital_layer
+  attrs: {}
+- id: STARLINK_MINI
+  label: Starlink Mini
+  type: network_load
+  domain: poe
+  location: roof_or_trailer
+  attrs: {}
+- id: CAM_POE_01
+  label: PoE Camera Front
+  type: camera
+  domain: poe
+  location: trailer_exterior_front
+  attrs: {}
+- id: CAM_POE_02
+  label: PoE Camera Rear
+  type: camera
+  domain: poe
+  location: trailer_exterior_rear
+  attrs: {}
+- id: CAM_POE_03
+  label: PoE Camera Left
+  type: camera
+  domain: poe
+  location: trailer_exterior_left
+  attrs: {}
+- id: CAM_POE_04
+  label: PoE Camera Right
+  type: camera
+  domain: poe
+  location: trailer_exterior_right
+  attrs: {}
+- id: TEMP_RACK
+  label: Rack Temp Sensor
+  type: sensor
+  domain: telemetry
+  location: rack
+  attrs: {}
+- id: TEMP_TRAILER_INSIDE
+  label: Inside Temp Sensor
+  type: sensor
+  domain: telemetry
+  location: trailer_inside
+  attrs: {}
+- id: TEMP_TRAILER_OUTSIDE
+  label: Outside Temp Sensor
+  type: sensor
+  domain: telemetry
+  location: trailer_outside
+  attrs: {}
+- id: RS232_BAT_A
+  label: Battery A RS232
+  type: telemetry_interface
+  domain: telemetry
+  location: BAT_48V_A
+  attrs: {}
+- id: RS232_BAT_B
+  label: Battery B RS232
+  type: telemetry_interface
+  domain: telemetry
+  location: BAT_48V_B
+  attrs: {}
+- id: RS485_INV_AIO
+  label: Inverter RS485
+  type: telemetry_interface
+  domain: telemetry
+  location: INV_48V_AIO
+  attrs: {}
+- id: SHUNT_DC_LOAD_01
+  label: 12V Dirty Shunt
+  type: shunt
+  domain: telemetry
+  location: dirty_12v
+  attrs: {}
+- id: SHUNT_DC_LOAD_02
+  label: 12V Clean Shunt
+  type: shunt
+  domain: telemetry
+  location: clean_12v
+  attrs: {}
+- id: SHUNT_DC_LOAD_03
+  label: 5V Critical Shunt
+  type: shunt
+  domain: telemetry
+  location: critical_5v
+  attrs: {}
+links:
+- id: L001
+  from: BAT_48V_A
+  to: FUSE_BAT_A_POS
+  kind: power_pos
+  voltage: 48V
+  notes: Battery A positive
+- id: L002
+  from: FUSE_BAT_A_POS
+  to: SW_48V_MAIN
+  kind: power_pos
+  voltage: 48V
+- id: L003
+  from: SW_48V_MAIN
+  to: BUS_48V_POS
+  kind: power_pos
+  voltage: 48V
+- id: L004
+  from: BAT_48V_B
+  to: FUSE_BAT_B_POS
+  kind: power_pos
+  voltage: 48V
+  notes: Battery B positive
+- id: L005
+  from: FUSE_BAT_B_POS
+  to: SW_48V_MAIN
+  kind: power_pos
+  voltage: 48V
+- id: L006
+  from: BAT_48V_A
+  to: SHUNT_48V_MAIN
+  kind: power_neg
+  voltage: 48V
+  notes: Battery A negative
+- id: L007
+  from: BAT_48V_B
+  to: SHUNT_48V_MAIN
+  kind: power_neg
+  voltage: 48V
+  notes: Battery B negative
+- id: L008
+  from: SHUNT_48V_MAIN
+  to: BUS_48V_NEG
+  kind: power_neg
+  voltage: 48V
+- id: L009
+  from: BUS_48V_POS
+  to: INV_48V_AIO
+  kind: power_pos
+  voltage: 48V
+- id: L010
+  from: BUS_48V_NEG
+  to: INV_48V_AIO
+  kind: power_neg
+  voltage: 48V
+- id: L011
+  from: PV_ARRAY_2S2P
+  to: SPD_PV_IN
+  kind: power_pos
+  voltage: PV
+- id: L012
+  from: SPD_PV_IN
+  to: BRK_PV_INPUT
+  kind: power_pos
+  voltage: PV
+- id: L013
+  from: BRK_PV_INPUT
+  to: INV_48V_AIO
+  kind: power_pos
+  voltage: PV
+- id: L014
+  from: SHORE_AC_IN
+  to: SPD_AC_IN
+  kind: ac_line
+  voltage: 120VAC
+- id: L015
+  from: SPD_AC_IN
+  to: BRK_AC_IN
+  kind: ac_line
+  voltage: 120VAC
+- id: L016
+  from: BRK_AC_IN
+  to: INV_48V_AIO
+  kind: ac_line
+  voltage: 120VAC
+- id: L017
+  from: INV_48V_AIO
+  to: SPD_AC_OUT
+  kind: ac_line
+  voltage: 120VAC
+- id: L018
+  from: SPD_AC_OUT
+  to: PANEL_AC_OUT
+  kind: ac_line
+  voltage: 120VAC
+- id: L019
+  from: PANEL_AC_OUT
+  to: BRANCH_AC_GENERAL
+  kind: ac_line
+  voltage: 120VAC
+- id: L020
+  from: BUS_48V_POS
+  to: DCDC_48V_TO_12V_MAIN
+  kind: power_pos
+  voltage: 48V
+- id: L021
+  from: BUS_48V_NEG
+  to: DCDC_48V_TO_12V_MAIN
+  kind: power_neg
+  voltage: 48V
+- id: L022
+  from: DCDC_48V_TO_12V_MAIN
+  to: BRK_12V_MAIN_DIRTY
+  kind: power_pos
+  voltage: 12V
+- id: L023
+  from: DCDC_48V_TO_12V_MAIN
+  to: BRK_12V_MAIN_CLEAN
+  kind: power_pos
+  voltage: 12V
+- id: L024
+  from: BRK_12V_MAIN_DIRTY
+  to: BUS_12V_DIRTY_POS
+  kind: power_pos
+  voltage: 12V
+- id: L025
+  from: BRK_12V_MAIN_CLEAN
+  to: BUS_12V_CLEAN_POS
+  kind: power_pos
+  voltage: 12V
+- id: L026
+  from: DCDC_48V_TO_12V_MAIN
+  to: BUS_12V_NEG
+  kind: power_neg
+  voltage: 12V
+- id: L027
+  from: BUS_12V_CLEAN_POS
+  to: UPS_12V_CRITICAL
+  kind: power_pos
+  voltage: 12V
+- id: L028
+  from: BUS_12V_NEG
+  to: UPS_12V_CRITICAL
+  kind: power_neg
+  voltage: 12V
+- id: L029
+  from: UPS_12V_CRITICAL
+  to: DCDC_12V_TO_5V_CRITICAL
+  kind: power_pos
+  voltage: 12V
+- id: L030
+  from: BUS_12V_NEG
+  to: DCDC_12V_TO_5V_CRITICAL
+  kind: power_neg
+  voltage: 12V
+- id: L031
+  from: DCDC_12V_TO_5V_CRITICAL
+  to: UPS_5V_PI
+  kind: power_pos
+  voltage: 5V
+- id: L032
+  from: DCDC_12V_TO_5V_CRITICAL
+  to: BUS_5V_NEG
+  kind: power_neg
+  voltage: 5V
+- id: L033
+  from: UPS_5V_PI
+  to: BUS_5V_CRITICAL_POS
+  kind: power_pos
+  voltage: 5V
+- id: L034
+  from: BUS_5V_CRITICAL_POS
+  to: RPI5_MAIN
+  kind: power_pos
+  voltage: 5V
+- id: L035
+  from: BUS_5V_NEG
+  to: RPI5_MAIN
+  kind: power_neg
+  voltage: 5V
+- id: L036
+  from: BUS_5V_CRITICAL_POS
+  to: RELAY_5V_IO
+  kind: power_pos
+  voltage: 5V
+- id: L037
+  from: BUS_5V_NEG
+  to: RELAY_5V_IO
+  kind: power_neg
+  voltage: 5V
+- id: L038
+  from: BUS_12V_CLEAN_POS
+  to: SW_POE_MAIN
+  kind: power_pos
+  voltage: 12V
+- id: L039
+  from: BUS_12V_NEG
+  to: SW_POE_MAIN
+  kind: power_neg
+  voltage: 12V
+- id: L040
+  from: SW_POE_MAIN
+  to: STARLINK_MINI
+  kind: data_power
+  voltage: PoE
+- id: L041
+  from: SW_POE_MAIN
+  to: CAM_POE_01
+  kind: data_power
+  voltage: PoE
+- id: L042
+  from: SW_POE_MAIN
+  to: CAM_POE_02
+  kind: data_power
+  voltage: PoE
+- id: L043
+  from: SW_POE_MAIN
+  to: CAM_POE_03
+  kind: data_power
+  voltage: PoE
+- id: L044
+  from: SW_POE_MAIN
+  to: CAM_POE_04
+  kind: data_power
+  voltage: PoE
+- id: L045
+  from: RS232_BAT_A
+  to: RPI5_MAIN
+  kind: telemetry
+  voltage: null
+- id: L046
+  from: RS232_BAT_B
+  to: RPI5_MAIN
+  kind: telemetry
+  voltage: null
+- id: L047
+  from: RS485_INV_AIO
+  to: RPI5_MAIN
+  kind: telemetry
+  voltage: null
+- id: L048
+  from: TEMP_RACK
+  to: RPI5_MAIN
+  kind: telemetry
+  voltage: null
+- id: L049
+  from: TEMP_TRAILER_INSIDE
+  to: RPI5_MAIN
+  kind: telemetry
+  voltage: null
+- id: L050
+  from: TEMP_TRAILER_OUTSIDE
+  to: RPI5_MAIN
+  kind: telemetry
+  voltage: null
+- id: L051
+  from: SHUNT_DC_LOAD_01
+  to: RPI5_MAIN
+  kind: telemetry
+  voltage: null
+- id: L052
+  from: SHUNT_DC_LOAD_02
+  to: RPI5_MAIN
+  kind: telemetry
+  voltage: null
+- id: L053
+  from: SHUNT_DC_LOAD_03
+  to: RPI5_MAIN
+  kind: telemetry
+  voltage: null
+diagram_layout:
+  bands:
+  - id: dc48
+    label: 48V DC Core
+    x: 20
+    y: 20
+    w: 1500
+    h: 180
+  - id: io
+    label: PV / AC Inputs
+    x: 20
+    y: 220
+    w: 1500
+    h: 140
+  - id: dc12
+    label: 12V Distribution
+    x: 20
+    y: 380
+    w: 1500
+    h: 160
+  - id: dc5
+    label: 5V Critical / Digital
+    x: 20
+    y: 560
+    w: 1500
+    h: 170
+  - id: telemetry
+    label: Telemetry / Sensors
+    x: 20
+    y: 750
+    w: 1500
+    h: 170
+  positions:
+    BAT_48V_A:
+    - 60
+    - 70
+    FUSE_BAT_A_POS:
+    - 220
+    - 70
+    SW_48V_MAIN:
+    - 380
+    - 70
+    BUS_48V_POS:
+    - 560
+    - 70
+    BAT_48V_B:
+    - 60
+    - 140
+    FUSE_BAT_B_POS:
+    - 220
+    - 140
+    SHUNT_48V_MAIN:
+    - 220
+    - 110
+    BUS_48V_NEG:
+    - 560
+    - 140
+    INV_48V_AIO:
+    - 820
+    - 95
+    PV_ARRAY_2S2P:
+    - 60
+    - 265
+    SPD_PV_IN:
+    - 240
+    - 265
+    BRK_PV_INPUT:
+    - 420
+    - 265
+    SHORE_AC_IN:
+    - 60
+    - 315
+    SPD_AC_IN:
+    - 240
+    - 315
+    BRK_AC_IN:
+    - 420
+    - 315
+    SPD_AC_OUT:
+    - 1040
+    - 265
+    PANEL_AC_OUT:
+    - 1220
+    - 265
+    BRANCH_AC_GENERAL:
+    - 1400
+    - 265
+    DCDC_48V_TO_12V_MAIN:
+    - 820
+    - 430
+    BRK_12V_MAIN_DIRTY:
+    - 1030
+    - 400
+    BRK_12V_MAIN_CLEAN:
+    - 1030
+    - 470
+    BUS_12V_DIRTY_POS:
+    - 1240
+    - 400
+    BUS_12V_CLEAN_POS:
+    - 1240
+    - 470
+    BUS_12V_NEG:
+    - 1240
+    - 530
+    UPS_12V_CRITICAL:
+    - 1450
+    - 470
+    DCDC_12V_TO_5V_CRITICAL:
+    - 820
+    - 610
+    UPS_5V_PI:
+    - 1030
+    - 610
+    BUS_5V_CRITICAL_POS:
+    - 1240
+    - 610
+    BUS_5V_NEG:
+    - 1240
+    - 680
+    RPI5_MAIN:
+    - 1450
+    - 610
+    RELAY_5V_IO:
+    - 1450
+    - 680
+    SW_POE_MAIN:
+    - 1030
+    - 760
+    STARLINK_MINI:
+    - 1240
+    - 760
+    CAM_POE_01:
+    - 1240
+    - 810
+    CAM_POE_02:
+    - 1380
+    - 760
+    CAM_POE_03:
+    - 1380
+    - 810
+    CAM_POE_04:
+    - 1520
+    - 760
+    TEMP_RACK:
+    - 60
+    - 810
+    TEMP_TRAILER_INSIDE:
+    - 240
+    - 810
+    TEMP_TRAILER_OUTSIDE:
+    - 420
+    - 810
+    RS232_BAT_A:
+    - 600
+    - 810
+    RS232_BAT_B:
+    - 780
+    - 810
+    RS485_INV_AIO:
+    - 960
+    - 810
+    SHUNT_DC_LOAD_01:
+    - 60
+    - 870
+    SHUNT_DC_LOAD_02:
+    - 240
+    - 870
+    SHUNT_DC_LOAD_03:
+    - 420
+    - 870

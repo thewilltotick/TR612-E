@@ -1,37 +1,36 @@
-# Trailer Electrical Digital Twin Starter
+# Trailer digital twin starter v2
 
-This starter project is organized so your wiring diagrams can be version controlled now and connected to live telemetry later.
+This version fixes the core issue from v1:
 
-## Goals
-- Keep electrical diagrams diff-friendly and organized
-- Assign stable `component_id` values to every major component
-- Map sensors and telemetry to those same IDs
-- Make it easy to build a future live system map from Raspberry Pi data
+- `data_model/system_graph.yaml` is the **single source of truth**
+- `components.yaml` and `connections.yaml` are derived views
+- `diagrams/01_overview.drawio` is generated from `system_graph.yaml`
 
-## Folder layout
-- `diagrams/`: draw.io diagrams with `component_id` tags on shapes
-- `data_model/`: canonical component and connection definitions
-- `telemetry/`: sensor definitions and telemetry/component mappings
-- `docs/`: design notes and naming rules
-- `scripts/`: helper scripts for validation and future rendering
+Do not hand-edit the generated draw.io file if you want reproducibility.
+Instead:
+1. edit `system_graph.yaml`
+2. run `python scripts/generate_drawio.py`
+3. optionally run `python scripts/validate_graph.py`
 
-## Recommended workflow
-1. Edit YAML files first when adding or renaming hardware
-2. Update the draw.io diagrams to match the YAML IDs
-3. Commit diagram and YAML changes together
-4. Keep one commit per wiring/layout change where possible
+## Model rules
+- Every component must appear in `system_graph.yaml.components`
+- Every link must appear in `system_graph.yaml.links`
+- Every positive and negative power path should be explicit as separate links
+- Layout is stored in `system_graph.yaml.diagram_layout.positions`
+- Generated files:
+  - `data_model/components.yaml`
+  - `data_model/connections.yaml`
+  - `diagrams/01_overview.drawio`
 
-## Current scope
-This first pass includes:
-- A starter 48V/12V/5V/AC architecture
-- Core trailer power components
-- Placeholder telemetry mappings for battery, inverter, temperature, network, and PoE power
-- A starter draw.io system diagram
+## Link kinds
+- `power_pos`
+- `power_neg`
+- `ac_line`
+- `data_power`
+- `telemetry`
 
-## Next review items
-You should check these carefully:
-- Component names and boundaries
-- Which loads belong on clean vs dirty 12V
-- Whether the Pi should be modeled on 5V UPS only or as part of a wider critical-power subtree
-- Exact breaker/fuse placement
-- Whether you want separate diagrams for solar, alternator charging, AC shore/generator input, and networking
+## Current approximations still to review
+- exact protection ratings
+- exact PoE / Starlink path
+- exact negative-return strategy for all subloads
+- whether some branches need separate fuses instead of shared breakers

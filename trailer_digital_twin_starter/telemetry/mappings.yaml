@@ -1,78 +1,18 @@
 mappings:
-  - component_id: BAT_48V_A
-    display_name: Battery A
-    telemetry:
-      voltage_v: SENS_RS232_BAT_A.battery_voltage_v
-      current_a: SENS_RS232_BAT_A.battery_current_a
-      soc_pct: SENS_RS232_BAT_A.state_of_charge_pct
-      temperature_c: SENS_RS232_BAT_A.temperature_c
-      alarm_state: SENS_RS232_BAT_A.alarm_state
-
-  - component_id: BAT_48V_B
-    display_name: Battery B
-    telemetry:
-      voltage_v: SENS_RS232_BAT_B.battery_voltage_v
-      current_a: SENS_RS232_BAT_B.battery_current_a
-      soc_pct: SENS_RS232_BAT_B.state_of_charge_pct
-      temperature_c: SENS_RS232_BAT_B.temperature_c
-      alarm_state: SENS_RS232_BAT_B.alarm_state
-
-  - component_id: BUS_48V_MAIN
-    display_name: Main 48V Bus
-    telemetry:
-      bus_voltage_v: SENS_SHUNT_48V_MAIN.battery_voltage_v
-      bus_current_a: SENS_SHUNT_48V_MAIN.battery_current_a
-      bus_power_w: SENS_SHUNT_48V_MAIN.battery_power_w
-
-  - component_id: INV_48V_AIO
-    display_name: Inverter/Charger
-    telemetry:
-      status: SENS_RS485_INV.inverter_status
-      ac_output_v: SENS_RS485_INV.ac_output_v
-      ac_output_w: SENS_RS485_INV.ac_output_w
-      pv_input_v: SENS_RS485_INV.pv_input_v
-      pv_input_w: SENS_RS485_INV.pv_input_w
-      fault_code: SENS_RS485_INV.fault_code
-      heatsink_temp_c: SENS_RS485_INV.heatsink_temp_c
-
-  - component_id: BUS_12V_DIRTY
-    display_name: 12V Dirty Bus
-    telemetry:
-      voltage_v: SENS_SHUNT_12V_DIRTY.bus_voltage_v
-      current_a: SENS_SHUNT_12V_DIRTY.current_a
-      power_w: SENS_SHUNT_12V_DIRTY.power_w
-
-  - component_id: BUS_12V_CLEAN
-    display_name: 12V Clean Bus
-    telemetry:
-      voltage_v: SENS_SHUNT_12V_CLEAN.bus_voltage_v
-      current_a: SENS_SHUNT_12V_CLEAN.current_a
-      power_w: SENS_SHUNT_12V_CLEAN.power_w
-
-  - component_id: BUS_5V_CRITICAL
-    display_name: 5V Critical Bus
-    telemetry:
-      voltage_v: SENS_SHUNT_5V_CRITICAL.bus_voltage_v
-      current_a: SENS_SHUNT_5V_CRITICAL.current_a
-      power_w: SENS_SHUNT_5V_CRITICAL.power_w
-
-  - component_id: RPI5_MAIN
-    display_name: Raspberry Pi 5
-    telemetry:
-      power_bus_v: SENS_SHUNT_5V_CRITICAL.bus_voltage_v
-      rack_temp_c: SENS_TEMP_RACK.temperature_c
-
-  - component_id: TEMP_RACK
-    display_name: Rack Temperature
-    telemetry:
-      temperature_c: SENS_TEMP_RACK.temperature_c
-
-  - component_id: TEMP_TRAILER_INSIDE
-    display_name: Trailer Interior Temperature
-    telemetry:
-      temperature_c: SENS_TEMP_TRAILER_INSIDE.temperature_c
-
-  - component_id: TEMP_TRAILER_OUTSIDE
-    display_name: Trailer Exterior Temperature
-    telemetry:
-      temperature_c: SENS_TEMP_TRAILER_OUTSIDE.temperature_c
+- component_id: BAT_48V_A
+  values_from:
+  - BAT_A_RS232_SENSOR.battery_voltage
+  - BAT_A_RS232_SENSOR.battery_current
+- component_id: BAT_48V_B
+  values_from:
+  - BAT_B_RS232_SENSOR.battery_voltage
+  - BAT_B_RS232_SENSOR.battery_current
+- component_id: INV_48V_AIO
+  values_from:
+  - INV_RS485_SENSOR.fault_code
+  - INV_RS485_SENSOR.ac_output_power
+  - INV_RS485_SENSOR.pv_input_power
+- component_id: SHUNT_48V_MAIN
+  values_from:
+  - SHUNT_48V_MAIN_SENSOR.pack_voltage
+  - SHUNT_48V_MAIN_SENSOR.pack_current
